@@ -68,6 +68,46 @@
         white-space: nowrap;
         margin-right: 5px
     }
+
+    .scroll-mouse-enter {
+        max-height: 400px;
+        overflow-y: hidden;
+    }
+
+    .medium-scroll {
+        max-height: 300px;
+    }
+
+    .scroll-visible{
+        overflow-y: scroll;
+    }
+
+    .scroll-mouse-enter::-webkit-scrollbar {
+        width: 5px;
+    }
+
+
+    .scroll-mouse-enter::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+
+    .scroll-mouse-enter::-webkit-scrollbar-thumb {
+        background: #b9b8b837;
+        border-radius: 6px;
+    }
+
+
+    .scroll-mouse-enter::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+    @media (max-width: 1024px) {
+        .scroll-mouse-enter{
+            overflow-y: scroll;
+        }
+    }
+
     @media (max-width: 768px) {
         .age-restriction-icon {
         padding: 5px 0; 
@@ -102,6 +142,7 @@
     <img src="https://github.com/BrunoSobrino.png" alt="BrunoSobrino" width="48" height="48" style="border-radius: 50%;">
     <div class="sidebar-brand-text mx-3" style="white-space: nowrap;">By BrunoSobrino</div>
 </a>
+            <!--
 <audio autoplay loop>
     <source src="musicDocs.mp3" type="audio/mpeg">
     <source src="musicDocs.wav" type="audio/wav">
@@ -110,7 +151,8 @@
             <li class="nav-item active"></li>
             <hr class="sidebar-divider">
             <button id="toggleButton" class="button-style">Pausar Música</button>
-            </hr>
+           -->
+
             <hr class="sidebar-divider">
             <div class="sidebar-heading">Features</div>
             <li class="nav-item">
@@ -119,24 +161,32 @@
                     <span>Descargadores</span>
                 </a>
                 <div id="collapseDownload" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
-                    <div class="py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Downloaders & Medias</h6>
-                        <a class="collapse-item" target="_blank" href="/api/v1/ytmp3?url=https://youtu.be/JLWRZ8eWyZo?si=EmeS9fJvS_OkDk7p">YTMP3 V1</a>
-                        <a class="collapse-item" target="_blank" href="/api/v2/ytmp3?url=https://youtu.be/JLWRZ8eWyZo?si=EmeS9fJvS_OkDk7p">YTMP3 V2</a>
-                        <a class="collapse-item" target="_blank" href="/api/v1/ytmp4?url=https://youtu.be/JLWRZ8eWyZo?si=EmeS9fJvS_OkDk7p">YTMP4 V1</a>
-                        <a class="collapse-item" target="_blank" href="/api/v2/ytmp4?url=https://youtu.be/JLWRZ8eWyZo?si=EmeS9fJvS_OkDk7p">YTMP4 V2</a>
-                        <a class="collapse-item" target="_blank" href="/api/ytplay?text=begin%20you">YT Play ex 1</a>
-                        <a class="collapse-item" target="_blank" href="/api/ytplay?url=https://youtu.be/JLWRZ8eWyZo?si=EmeS9fJvSOkDk7p">YT Play ex 2</a>
-                        <a class="collapse-item" target="_blank" href="/api/spotifydl?text=maneskin%20beggin">SpotifyDL ex 1</a>
-                        <a class="collapse-item" target="_blank" href="/api/spotifydl?url=https://open.spotify.com/track/3Wrjm47oTz2sjIgck11l5e">SpotifyDL ex 2</a>
-                        <a class="collapse-item" target="_blank" href="/api/spotifyinfo?text=maneskin%20beggin">SpotifyInfo ex 1</a>
-                        <a class="collapse-item" target="_blank" href="/api/spotifyinfo?url=https://open.spotify.com/track/3Wrjm47oTz2sjIgck11l5e">SpotifyInfo ex 2</a>
-                        <a class="collapse-item" target="_blank" href="/api/v1/igdl?url=https://www.instagram.com/reel/Cc0NuYBg8CR/?utm_source=ig_web_copy_link">InstagramDL V1</a>
-                        <a class="collapse-item" target="_blank" href="/api/tiktokv1?url=https://vm.tiktok.com/ZMjPXawEV">TikTokDL (img/video)</a>
-                        <a class="collapse-item" target="_blank" href="/api/tiktokv2?url=https://vm.tiktok.com/ZMjPXawEV">TikTokDL (video)</a>
-                        <a class="collapse-item" target="_blank" href="/api/ttimg?url=https://vm.tiktok.com/ZM2cqBRVS">TTImg (img)</a>
-                        <a class="collapse-item" target="_blank" href="/api/facebook?url=https://fb.watch/fOTpgn6UFQ">Facebook DL</a>
-                        <a class="collapse-item" target="_blank" href="/api/xnxxdl?url=https://www.xnxx.com/video-11qev1b8/estudiante_latina_se_da_unos_sentones_">XNXX DL</a>
+                    <div class="py-2 collapse-inner rounded scroll-mouse-enter">
+                        <h6 class="collapse-header">YouTube</h6>
+                        <a class="collapse-item" target="_blank" href="/api/v1/ytmp3?url=https://youtu.be/JLWRZ8eWyZo?si=EmeS9fJvS_OkDk7p">MP3 - URL V1</a>
+                        <a class="collapse-item" target="_blank" href="/api/v2/ytmp3?url=https://youtu.be/JLWRZ8eWyZo?si=EmeS9fJvS_OkDk7p">MP3 - URL V2</a>
+                        <a class="collapse-item" target="_blank" href="/api/v1/ytmp4?url=https://youtu.be/JLWRZ8eWyZo?si=EmeS9fJvS_OkDk7p">MP4 - URL V1</a>
+                        <a class="collapse-item" target="_blank" href="/api/v2/ytmp4?url=https://youtu.be/JLWRZ8eWyZo?si=EmeS9fJvS_OkDk7p">MP4 - URL V2</a>
+                        <a class="collapse-item" target="_blank" href="/api/ytplay?text=begin%20you">Play - Texto</a>
+                        <a class="collapse-item" target="_blank" href="/api/ytplay?url=https://youtu.be/JLWRZ8eWyZo?si=EmeS9fJvSOkDk7p">Play - URL</a>
+                        <a class="collapse-item" target="_blank" href="/api/ytinfo?url=https://youtu.be/JLWRZ8eWyZo?si=EmeS9fJvSOkDk7p">YT Info - URL</a>
+                        <h6 class="collapse-header">Spotify</h6>
+                        <a class="collapse-item" target="_blank" href="/api/spotifydl?text=Believer">Track - Texto</a>
+                        <a class="collapse-item" target="_blank" href="/api/spotifydl?url=https://open.spotify.com/track/3Wrjm47oTz2sjIgck11l5e">Track - URL</a>
+                        <a class="collapse-item" target="_blank" href="/api/spotifyinfo?text=Believer">InfoTrack - Texto</a>
+                        <a class="collapse-item" target="_blank" href="/api/spotifyinfo?url=https://open.spotify.com/track/3Wrjm47oTz2sjIgck11l5e">InfoTrack - URL</a>
+                        <h6 class="collapse-header">Instagram</h6>
+                        <a class="collapse-item" target="_blank" href="/api/v1/igdl?url=https://www.instagram.com/reel/C6Xf0ZvLQnl/?igsh=cjZ1Mmlia3J5bzl3">Instagram - URL</a>
+                        <h6 class="collapse-header">Tiktok</h6>
+                        <a class="collapse-item" target="_blank" href="/api/ttimg?url=https://vm.tiktok.com/ZM6WcvHcP">Imagen - URL</a>
+                        <a class="collapse-item" target="_blank" href="/api/tiktokv2?url=https://vm.tiktok.com/ZM6Wcc2ag">Vídeo - URL</a>
+                        <a class="collapse-item" target="_blank" href="/api/tiktokv1?url=https://vm.tiktok.com/ZM6Wcc2ag">Imagen/Vídeo - URL</a>
+                        <h6 class="collapse-header">Facebook</h6>
+                        <a class="collapse-item" target="_blank" href="/api/facebook?url=https://fb.watch/fOTpgn6UFQ">Facebook - URL</a>
+                        <h6 class="collapse-header">XNXX</h6>
+                        <a class="collapse-item" target="_blank" href="/api/xnxxdl?url=https://www.xnxx.com/video-11qev1b8/estudiante_latina_se_da_unos_sentones_">XNXX - URL</a>
+                        <h6 class="collapse-header">X Twitter</h6>
+                        <a class="collapse-item" target="_blank" href="/api/twitterdl?url=https://twitter.com/auronplay/status/1586487664274206720?s=20&t=3snvkvwGUIez5iWYQAehpw">X_Twitter - URL</a>                                                
                     </div>
                 </div>
             </li>
@@ -161,9 +211,9 @@
                     <span>Herramientas</span>
                 </a>
                 <div id="collapseTools" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
-                    <div class="py-2 collapse-inner rounded">
+                    <div class="py-2 collapse-inner rounded scroll-mouse-enter">
                         <h6 class="collapse-header">Tools Features</h6>
-                        <a class="collapse-item" target="_blank" href="/api/chatgpt?text=Hola&lenguaje=es">ChatGPT</a>
+                        <a class="collapse-item" target="_blank" href="/api/chatgpt?text=Hola&prompt=Deberas%20actuar%20como%20GptBoy%20y%20serás%20la%20inteligencia%20artifical%20de%20Api%20Empire,%20una%20api%20para%20bots%20de%20WhatsApp,%20telegram%20u%20otras%20plataformas%20que%20lo%20permitan.%20Tu%20proporcionas%20informacion%20sobre%20diversos%20temas%20utilizando%20el%20modelo%20de%20gpt%20de%20openAI.%20Cuando%20te%20presentes%20debes%20usar%20GptBoy%20y%20ser%20comico-insulton%20(sarcastico)%20con%20la%20personas">ChatGPT</a>
                         <a class="collapse-item" target="_blank" href="/api/tempmail/getmail">TempMail getMail</a>
                         <a class="collapse-item" target="_blank" href="/api/tempmail/getmessages?mail=miusuario@ejemplo.com">TempMail getMessage</a>
                         <a class="collapse-item" target="_blank" href="/api/lyrics?text=maneskin%20beggin">Lyrics</a>
@@ -181,7 +231,7 @@
                     <span>NSFW</span>
                 </a>
                 <div id="collapseNsfw" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
-                    <div class="py-2 collapse-inner rounded">
+                    <div class="py-2 collapse-inner rounded scroll-mouse-enter">
                         <h6 class="collapse-header">NSFW Random</h6>
                         <a class="collapse-item" target="_blank" href="/api/nsfw/nsfwass">nsfwass</a>
                         <a class="collapse-item" target="_blank" href="/api/nsfw/nsfwbdsm">nsfwbdsm</a>
@@ -206,7 +256,7 @@
                     <span>Random +18</span>
                 </a>
                 <div id="collapse18plus" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
-                    <div class="py-2 collapse-inner rounded">
+                    <div class="py-2 collapse-inner rounded scroll-mouse-enter">
                         <h6 class="collapse-header">+18 Random</h6>
                         <a class="collapse-item" target="_blank" href="/api/adult/packgirl">Packs Girl</a>
                         <a class="collapse-item" target="_blank" href="/api/adult/packmen">Packs Mens</a>
@@ -230,7 +280,7 @@
                     <span>Random Anime</span>
                 </a>
                 <div id="collapAnimes" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
-                    <div class="py-2 collapse-inner rounded">
+                    <div class="py-2 collapse-inner rounded scroll-mouse-enter medium-scroll">
                         <h6 class="collapse-header">Anime Random</h6>
                         <a class="collapse-item" target="_blank" href="/api/anime/lolivid">loli video</a>
                         <a class="collapse-item" target="_blank" href="/api/anime/loli">loli</a>
@@ -279,7 +329,7 @@
                     <span>Wallpapers</span>
                 </a>
                 <div id="collapseWallpaper" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
-                    <div class="py-2 collapse-inner rounded">
+                    <div class="py-2 collapse-inner rounded scroll-mouse-enter medium-scroll">
                         <h6 class="collapse-header">Wallpapers Random</h6>
                         <a class="collapse-item" target="_blank" href="/api/wallpaper/coffee">coffee</a>
                         <a class="collapse-item" target="_blank" href="/api/wallpaper/wprandom">wprandom</a>
@@ -307,25 +357,61 @@
                     <span>Maker</span>
                 </a>
                 <div id="collapseMarker" class="collapse" aria-labelledby="headingSearch" data-parent="#accordionSidebar">
-                    <div class="py-2 collapse-inner rounded">
+                    <div class="py-2 collapse-inner rounded scroll-mouse-enter medium-scroll">
                         <h6 class="collapse-header">stickers</h6>
                         <a class="collapse-item" target="_blank" href="/api/maker/attp?text=api%20emipire">Attp</a>  
                         <h6 class="collapse-header">Canvas</h6>
-                        <a class="collapse-item" target="_blank" href="/api/maker/canvas/welcome?titulo=Bienvenido/a&username=Nombre%20del%20user&groupname=Nombre%20del%20grupo&profile=https://telegra.ph/file/24fa902ead26340f3df2c.png">Card Welcome</a>   
+                        <a class="collapse-item" target="_blank" href="/api/maker/canvas/welcome?titulo=Bienvenido/a&username=Nombre%20del%20user&groupname=Nombre%20del%20grupo&profile=https://github.com/BrunoSobrino.png">Card Welcome</a>   
                         <a class="collapse-item" target="_blank" href="/api/maker/canvas/welcome2?username=Bruno%20Sobrino&groupname=API%20Empire%20-%20Comunidad&membercount=12&description=Bienvenido(a),%20lee%20las%20reglas%20del%20grupo&profile=https://github.com/BrunoSobrino.png">Card Welcome 2</a>
                         <a class="collapse-item" target="_blank" href="/api/maker/canvas/welcome3?username=Bruno%20Sobrino&groupname=API%20Empire%20-%20Comunidad&membercount=12&description=Bienvenido(a),%20lee%20las%20reglas%20del%20grupo&profile=https://github.com/BrunoSobrino.png">Card Welcome 3</a>
                         <a class="collapse-item" target="_blank" href="/api/maker/canvas/welcome4?username=Bruno%20Sobrino&groupname=API%20Empire%20-%20Comunidad&membercount=12&description=Bienvenido(a),%20lee%20las%20reglas%20del%20grupo&profile=https://github.com/BrunoSobrino.png">Card Welcome 4</a>
                         <a class="collapse-item" target="_blank" href="/api/maker/canvas/welcome5?username=bruno&groupname=api%20empire&membercount=12&groupicon=https://telegra.ph/file/4cc51944c9130560fb4a9.jpg&profile=https://github.com/BrunoSobrino.png&background=https://telegra.ph/file/82d079999da723cc80899.png">Card Welcome 5</a>
+                        <a class="collapse-item" target="_blank" href="/api/maker/canvas/goodbye?username=bruno&groupname=api%20empire&membercount=12&memberdiscriminator=13&profile=https://github.com/BrunoSobrino.png&background=https://telegra.ph/file/82d079999da723cc80899.png">Card GoodBye 1</a>
+                        <a class="collapse-item" target="_blank" href="/api/maker/canvas/goodbye2?username=bruno&groupname=api%20empire&membercount=12&groupicon=https://telegra.ph/file/4cc51944c9130560fb4a9.jpg&profile=https://github.com/BrunoSobrino.png&background=https://telegra.ph/file/82d079999da723cc80899.png">Card GoodBye 2</a>
+                        <a class="collapse-item" target="_blank" href="/api/maker/canvas/goodbye3?username=Bruno&membercount=12&profile=https://github.com/BrunoSobrino.png&background=https://telegra.ph/file/82d079999da723cc80899.png">Card GoodBye 3</a>
+                        <a class="collapse-item" target="_blank" href="/api/maker/canvas/goodbye4?username=Bruno&profile=https://github.com/BrunoSobrino.png">Card GoodBye 4</a>                        
                         <h6 class="collapse-header">textpro</h6>
                         <a class="collapse-item" target="_blank" href="/api/maker/textpro/deep-sea-metal?text=api%20empire">Deep Sea Metal</a>
                         <a class="collapse-item" target="_blank" href="/api/maker/textpro/wolf-logo-galaxy?text1=api%20empire&text2=by%20brunosobrino">Wolf Logo Galaxy</a>
                         <h6 class="collapse-header">photooxy</h6>
                         <a class="collapse-item" target="_blank" href="/api/maker/photooxy/flaming?text=api%20empire">Flaming text</a>
                         <h6 class="collapse-header">ephoto360</h6>
-                        <a class="collapse-item" target="_blank" href="/api/maker/ephoto360/eraser-deleting-text?text=api%20empire">Eraser Deleting Text</a>                        
+                        <a class="collapse-item" target="_blank" href="/api/maker/ephoto360/eraser-deleting-text?text=api%20empire">Eraser Deleting Text</a>
                     </div>
                 </div>
             </li>
+  <hr class="sidebar-divider">
+<div class="sidebar-heading">MORE OPTIONS</div>
+<li class="nav-item">
+    <a class="nav-link" href="/human/youtube" target="_blank">
+        <i class="fab fa-fw fa-youtube"></i>
+        <span>YouTube</span>
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="/human/instagram" target="_blank">
+        <i class="fab fa-fw fa-instagram"></i>
+        <span>Instagram</span>
+    </a>
+</li>
+<!--<li class="nav-item">
+    <a class="nav-link" href="/human/x" target="_blank">
+        <i class="fas fa-fw fa-times"></i>
+        <span>X (Twitter)</span>
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="/human/tiktok" target="_blank">
+        <i class="fas fa-fw fa-music"></i>
+        <span>TikTok</span>
+    </a>
+</li>-->
+<li class="nav-item">
+    <a class="nav-link" href="/human/facebook" target="_blank">
+        <i class="fab fa-fw fa-facebook"></i>
+        <span>Facebook</span>
+    </a>
+</li>                  
             <hr class="sidebar-divider">
             <div class="sidebar-heading">Contact</div>
             <li class="nav-item">
@@ -346,23 +432,33 @@
                     <span>GitHub</span>
                 </a>
             </li>            
-            <hr class="sidebar-divider">
+          <hr class="sidebar-divider">
         </ul>
-<!-- Sidebar -->
-<div id="content-wrapper" class="d-flex flex-column">
-    <div id="content">
-        <!-- TopBar -->
-        <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
-            <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
-                <i class="fa fa-bars"></i>
-            </button>
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+                <!-- TopBar -->
+                <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
+                    <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>      
             <div class="text-container">
                 <h1 class="my-4 fire-text">API - EMPIRE <span class="fire-emoji">🔥</span></h1>
-            </div>
-            <ul class="navbar-nav ml-auto">
-                <div class="topbar-divider d-none d-sm-block"></div>
-            </ul>
-        </nav>
+            </div>                     
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="/" id="userDropdown" role="button" data-toggle="collapse" data-target="#dropdownProfile" aria-expanded="true" aria-controls="dropdownProfile">
+                                <i class="fa fa-user-circle fa-2x"></i>
+                                <span class="ml-2 d-none d-lg-inline small font-weight-bold" id="usermail">USUARIO</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div id="dropdownProfile" class="collapse" aria-labelledby="headingSearch" data-parent="#accordionSidebar">
+                        <div class="py-2 collapse-inner rounded">
+                            <a class="collapse-item" onclick="cerrarSesion()" href="#">Cerrar Sesión</a>
+                        </div>
+                    </div>
+                </nav>
+                <!-- Topbar -->
         <!-- Sidebar -->
                 <!-- Container Fluid-->
                 <div class="container-fluid" id="container-wrapper">
@@ -370,7 +466,7 @@
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col mr-2">
-                                    <h3 style="margin-bottom: 0;"><i class="fas fa-ruler text-danger"></i> INFORMACIÓN:</h3>
+                                    <div class="text-md-left font-weight-bold mb-2 text-primary"> INFORMACIÓN:</div>
                                     <div class="card-body mb-3">
                                         <ol>
                                             <li>API en desarrollo.</li>
@@ -389,7 +485,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-uppercase mb-1">Visitor</div>
+                                            <div class="text-xs font-weight-bold text-uppercase mb-1">VISITANTES</div>
                                             <div id="totalVisitors"></div>
                                             <!-- div class="h5 mb-0 font-weight-bold"><%= totalVisitors %></div -->
                                         </div>
@@ -406,7 +502,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-uppercase mb-1">Requests</div>
+                                            <div class="text-xs font-weight-bold text-uppercase mb-1">SOLICITUDES</div>
                                             <div id="totalRequests"></div>
                                             <!-- div class="h5 mb-0 font-weight-bold"><%= totalRequests %></div -->
                                         </div>
@@ -423,7 +519,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-uppercase mb-1">Uptime</div>
+                                            <div class="text-xs font-weight-bold text-uppercase mb-1">TIEMPO DE ACTIVIDAD</div>
                                             <div id="uptime"></div>
                                             <!-- div class="h5 mb-0 font-weight-bold"><%= uptime %></div -->
                                         </div>
@@ -434,6 +530,43 @@
                                 </div>
                             </div>
                         </div>
+
+                        
+                        <!-- Widgets - Latencia -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card h-50">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-uppercase mb-1">Latencia Interna</div>
+                                            <div id="latencia"></div>
+                                            <!-- div class="h5 mb-0 font-weight-bold"><%= totalRequests %></div -->
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-bolt faa-wrench fa-2x text-primary"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card h-50">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-uppercase mb-1">USOS RESTANTES</div>
+                                            <div id="totalUsos"></div>
+                                            <!-- div class="h5 mb-0 font-weight-bold"><%= totalRequests %></div -->
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-credit-card faa-wrench animated fa-2x text-primary"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div id="findipurl">
                                 <a href="find-ip.net"></a>
@@ -448,9 +581,9 @@
     <footer class="sticky-footer">
         <div class="container my-auto">
             <div class="copyright text-center my-auto">
-                <a href="https://www.zipponodes.com" target="_blank" style="color: #fff;">
-                    <img src="https://cdn.zipponodes.com/zipponodes/logos/741x860/logo_transparent.png" alt="Icono" style="width: 30px; height: 30px;">
-                    <span style="margin-left: 5px;">Powered By ZippoNodes</span>
+                <a href="https://www.cafirexos.com" target="_blank" style="color: #fff;">
+                    <img src="https://grxcwmcwbxwj.objectstorage.sa-saopaulo-1.oci.customer-oci.com/n/grxcwmcwbxwj/b/cafirexos/o/logos%2Flogo.png" alt="Icono" style="width: 30px; height: 30px;">
+                    <span style="margin-left: 5px;">Powered By Cafirexos Host</span>
                 </a>
             </div>
         </div>
@@ -469,11 +602,18 @@
         //document.getElementById('totalVisitors').textContent = data.totalVisitors;
         //document.getElementById('uptime').textContent = data.uptime;
      // });
+
+    function cerrarSesion() {
+        localStorage.removeItem('token');
+        window.location.reload()
+    }
+
     function updateUptime() {
         fetch('/status').then(response => response.json()).then(data => {
             document.getElementById('totalRequests').textContent = data.totalRequests;
             document.getElementById('totalVisitors').textContent = data.totalVisitors;
             document.getElementById('uptime').textContent = data.uptime;
+            document.getElementById('latencia').textContent = data.latencia;
         });
     }
     setInterval(updateUptime, 1000);
@@ -491,6 +631,56 @@
         }
         toggleButton.addEventListener("click", toggleAudio);
     });
+
+    const elementToScroll = document.getElementsByClassName('scroll-mouse-enter')
+
+    const elementArray = Array.from(elementToScroll)
+
+    elementArray.forEach(element => {
+        element.addEventListener('mouseenter', e => {
+            e.target.classList.add('scroll-visible')
+        })
+    });
+
+    elementArray.forEach(element => {
+        element.addEventListener('mouseleave', e => {
+            e.target.classList.remove('scroll-visible')
+        })
+    })
+
+    if (localStorage.getItem('token')) {
+    fetch('/api/manageusers/user', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+    })
+    .then(response => response.json()).then(data => {
+        if (!data.status) {
+        document.getElementById('usermail').textContent = "Invitado";
+        document.getElementById('userDropdown').attributes.removeNamedItem('data-toggle');
+        document.getElementById('userDropdown').href = "/login.html";
+        localStorage.removeItem('token');
+        } else {
+        document.getElementById('usermail').textContent = data.user.mail.split('@')[0];
+        document.getElementById("totalUsos").textContent = data.CurrentLimit - data.user.uses
+        for (let item of document.getElementsByTagName("a")) {
+            if (item.href.includes("api")) {
+                if (!item.href.includes("?")) item.href = item.href + "?apikey=" + data.user.apikey
+                else {
+                    item.href = item.href + "&apikey=" + data.user.apikey
+                }
+    }
+}
+        }
+    })
+    } else {
+        document.getElementById('usermail').textContent = "Invitado";
+        document.getElementById('userDropdown').attributes.removeNamedItem('data-toggle');
+        document.getElementById('userDropdown').href = "/";
+
+    }
 </script>
     <script src="https://BrunoSobrino.github.io/template-api/vendor/jquery/jquery.min.js"></script>
     <script src="https://BrunoSobrino.github.io/template-api/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

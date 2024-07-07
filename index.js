@@ -1,81 +1,54 @@
 process.on('uncaughtException', console.error)
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const cors = require('cors');
 const chalk = require('chalk');
-const port = 3036;
-const port2 = 50008;
+const port = 2035;
+const port2 = 10000;
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 const axios = require('axios');
 const favicon = require('serve-favicon');
+const nodemailer = require("nodemailer");
 const visitors = new Set(); 
 let totalRequests = 0;
 let totalVisitors = 0;
 
-var allowedOrigins = ['https://api-brunosobrino.zipponodes.xyz'];
+var allowedOrigins = ['https://api.cafirexos.com', 'http://localhost:2027'];
 
 app.set('trust proxy', 1)
 
-app.use(cors({
-    origin: function(origin, callback) {
-        if (!origin) return callback(null, true);
-        if (allowedOrigins.indexOf(origin) === -1) {
-            var msg = 'The CORS policy for this site does not ' +
-                'allow access from the specified Origin.';
-            return callback((msg));
-        }
-        return callback(null, true);
-    }
-}));
+// Inicicializar el servidor de correo
+
+if (process.env.new_user_verification === "true") {
+const transporter = nodemailer.createTransport({
+  host: process.env.smtp_host,
+  port: Number(process.env.smtp_port),
+  secure: process.env.smtp_is_secure === 'true',
+  auth: {
+    user: process.env.smtp_user,
+    pass: process.env.smtp_password
+  },
+});
+global.mTransporter = transporter;
+}
+
+
 
 // Funciones
 
 const home = require('./routes/home');
 const docs = require('./routes/docs');
-const ttimg = require('./routes/ttimg');
-const ytmp3 = require('./routes/ytmp3');
-const ytmp4 = require('./routes/ytmp4');
-const ytmp3_2 = require('./routes/ytmp3_2');
-const ytmp4_2 = require('./routes/ytmp4_2');
-const tiktokdl = require('./routes/tiktok');
-const ytsearch = require('./routes/ytsearch');
-const ytplay = require('./routes/ytplay');
-const spotifydl = require('./routes/spotifydl');
-const spotifyinfo = require('./routes/spotifyinfo');
-const spotifysearch = require('./routes/spotifysearch');
-const chatgpt = require('./routes/chatgpt');
-const igdl1 = require('./routes/igdl');
-const getmail = require('./routes/correos-getMail');
-const getmessages = require('./routes/correos-getMessages');
-const facebook = require('./routes/facebook');
-const xnxxdl = require('./routes/xnxxdl');
-const xnxxsearch = require('./routes/xnxxsearch');
-const apirouter = require('./routes/anime-apis');
-const apirouter2 = require('./routes/adult-apis');
-const apirouter3 = require('./routes/nsfw-apis');
-const apirouter4 = require('./routes/wallpaper-apis');
 const apirouter5 = require('./routes/human-apis');
-const apirouter6 = require('./routes/maker-apis');
-const lyrics = require('./routes/lyrics');
-const ssweb = require('./routes/ssweb');
-const googleImage = require('./routes/googleImage');
-const tiktokStalk = require('./routes/tiktokStalk');
-const igStalkss = require('./routes/igStalk');
-const stickersearch = require('./routes/stickersearch');
-const pinterest = require('./routes/pinterest');
-const tiktokdlv1 = require('./routes/tiktokdlv1');
-
-const test = require('./routes/@prueba');
-
 
 const getUptime = () => {
   const uptimeInSeconds = Math.floor(process.uptime());
   const hours = Math.floor(uptimeInSeconds / 3600);
   const minutes = Math.floor((uptimeInSeconds % 3600) / 60);
   const seconds = uptimeInSeconds % 60;
-  return `${hours} horas, ${minutes} minutos, ${seconds} segundos`;
+  return `${hours}h ${minutes}m ${seconds}s`;
 };
 
 // Subpaginas y usos
@@ -94,39 +67,13 @@ app.use((req, res, next) => {
 app.use('/', home);
 app.use('/docs', docs);
 
-app.use('/api/anime', apirouter);
-app.use('/api/adult', apirouter2);
-app.use('/api/nsfw', apirouter3);
-app.use('/api/wallpaper', apirouter4);
-app.use('/api/maker', apirouter6);
-app.use('/api/ttimg', ttimg);
-app.use('/api/v1/ytmp3', ytmp3);
-app.use('/api/v1/ytmp4', ytmp4);
-app.use('/api/v2/ytmp3', ytmp3_2);
-app.use('/api/v2/ytmp4', ytmp4_2);
-app.use('/api/tiktokv1', tiktokdlv1);
-app.use('/api/tiktokv2', tiktokdl);
-app.use('/api/ytsearch', ytsearch);
-app.use('/api/ytplay', ytplay);
-app.use('/api/spotifydl', spotifydl);
-app.use('/api/spotifyinfo', spotifyinfo);
-app.use('/api/spotifysearch', spotifysearch);
-app.use('/api/chatgpt', chatgpt);
-app.use('/api/v1/igdl', igdl1);
-app.use('/api/tempmail/getmail', getmail);
-app.use('/api/tempmail/getmessages', getmessages);
-app.use('/api/facebook', facebook);
-app.use('/api/xnxxdl', xnxxdl);
-app.use('/api/xnxxsearch', xnxxsearch);
-app.use('/api/lyrics', lyrics);
-app.use('/api/ssweb', ssweb);
-app.use('/api/googleimage', googleImage);
-app.use('/api/tiktokstalk', tiktokStalk);
-app.use('/api/igstalk', igStalkss);
-app.use('/api/stickersearch', stickersearch);
-app.use('/api/pinterest', pinterest);
-app.use('/api/test', test);
 
+app.use('/api', require('./routes'))
+
+// si es /human/algo usa las rutas dinamicas de ./routes/human
+app.use('/human', require('./routes/human'))
+
+//si es /human entra aqui directamente
 app.use('/human', apirouter5);
 
 app.use('/tmp', express.static('tmp'));
@@ -159,6 +106,8 @@ app.use(function(req, res, next) {
     const filePath = path.join(__dirname, 'public', '404.html');
     res.sendFile(filePath);
 });
+
+global.lolkeysapi = 'GataDiosV2';
 
 // Funciones automáticas 
 const clearTmpFiles = () => {

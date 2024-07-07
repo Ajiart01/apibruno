@@ -3,10 +3,27 @@ const router = express.Router();
 const path = require('path');
 const axios = require('axios');
 const { maker, ttp } = require('./func/functions');
-const { welCard } = require("@delirius/welcard");
-const { drawCard, LinearGradient } = require('discord-welcome-card');
-const knights = require("@clayzaaubert/canvix");
-const Canvas = require("discord-canvas-spanish-1ly4s0");
+let { welCard } = (() => {
+  try {
+    return require("@delirius/welcard");
+  } catch (error) {
+    console.error(`No se pudo importar "@delirius/welcard".`);
+    return {};
+  }
+})();
+let drawCard, LinearGradient, knights, Canvas;
+const tryRequire = (moduleName) => {
+  try {
+    return require(moduleName);
+  } catch (error) {
+    console.error(`No se pudo importar "${moduleName}".`);
+    return null;
+  }
+};
+drawCard = tryRequire('discord-welcome-card')?.drawCard;
+LinearGradient = tryRequire('discord-welcome-card')?.LinearGradient;
+knights = tryRequire("@clayzaaubert/canvix");
+Canvas = tryRequire("discord-canvas-spanish-1ly4s0");
 
 /* ------------{ canvas }------------ */
 
@@ -365,7 +382,7 @@ router.get('/attp', async (req, res) => {
       return;
     }        
     const ttpst = await ttp(texto);
-    const imageResponse = await axios.get(ttpst.resultado, { responseType: 'arraybuffer' });
+    const imageResponse = await axios.get(ttpst.resultado, {responseType: 'arraybuffer', headers: {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}});         
     const imageBuffer = Buffer.from(imageResponse.data, 'binary');
     res.setHeader('Content-Type', 'image/jpeg');
     res.send(imageBuffer);
@@ -391,12 +408,11 @@ router.get('/textpro/deep-sea-metal', async (req, res) => {
       return;
     }        
     const resss = await maker('https://textpro.me/create-3d-deep-sea-metal-text-effect-online-1053.html', [texto])
-    const imageResponse = await axios.get(resss.image, { responseType: 'arraybuffer' });
+    const imageResponse = await axios.get(resss.image, {responseType: 'arraybuffer', headers: {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}});   
     const imageBuffer = Buffer.from(imageResponse.data, 'binary');
     res.setHeader('Content-Type', 'image/jpeg');
     res.send(imageBuffer);
-  } catch (error) {
-    console.log(error)
+  } catch {
     res.sendFile(path.join(__dirname, '../public/500.html'));
   }
 });
@@ -417,7 +433,7 @@ router.get('/textpro/wolf-logo-galaxy', async (req, res) => {
       return;
     }        
     const resss = await maker('https://textpro.me/create-wolf-logo-galaxy-online-936.html', [texto1, texto2])
-    const imageResponse = await axios.get(resss.image, { responseType: 'arraybuffer' });
+    const imageResponse = await axios.get(resss.image, {responseType: 'arraybuffer', headers: {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}});       
     const imageBuffer = Buffer.from(imageResponse.data, 'binary');
     res.setHeader('Content-Type', 'image/jpeg');
     res.send(imageBuffer);
@@ -444,7 +460,7 @@ router.get('/photooxy/flaming', async (req, res) => {
       return;
     }        
     const resss = await maker('https://photooxy.com/logo-and-text-effects/realistic-flaming-text-effect-online-197.html', [texto])
-    const imageResponse = await axios.get(resss.image, { responseType: 'arraybuffer' });
+    const imageResponse = await axios.get(resss.image, {responseType: 'arraybuffer', headers: {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}});       
     const imageBuffer = Buffer.from(imageResponse.data, 'binary');
     res.setHeader('Content-Type', 'image/jpeg');
     res.send(imageBuffer);
@@ -471,7 +487,7 @@ router.get('/ephoto360/eraser-deleting-text', async (req, res) => {
       return;
     }        
     const resss = await maker('https://en.ephoto360.com/create-eraser-deleting-text-effect-online-717.html', [texto])
-    const imageResponse = await axios.get(resss.image, { responseType: 'arraybuffer' });
+    const imageResponse = await axios.get(resss.image, {responseType: 'arraybuffer', headers: {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}});       
     const imageBuffer = Buffer.from(imageResponse.data, 'binary');
     res.setHeader('Content-Type', 'image/jpeg');
     res.send(imageBuffer);

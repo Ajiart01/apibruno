@@ -1,27 +1,28 @@
 const express = require('express');
 const router = express.Router();
+const fs = require('fs');
 const path = require('path');
-const { tiktokv2 } = require('./func/tiktokdl');
+const YT = require('./func/YT_mp3_mp4');
 
 router.get('/', async (req, res) => {
-  const url = req.query.url; 
+  const match_url = req.query.url;
   try {
-    if (!url) {
+    if (!match_url) {
       const errorResponse = {
         status: false,
-        message: 'Debes ingresar el link de un video o imagen de tiktok.'
+        message: 'Debes especificar la URL de video de YouTube'
       };
       const formattedResults_e = JSON.stringify(errorResponse, null, 2);
       res.setHeader('Content-Type', 'application/json');
       res.send(formattedResults_e);
       return;
     }        
-    const pint = await tiktokv2(url);
-    const formattedResults = JSON.stringify(pint, null, 2);
+    const infoaud = await YT.ytinfo2(match_url);
+    const formattedResults = JSON.stringify(infoaud, null, 2);
     res.setHeader('Content-Type', 'application/json');
-    res.send(formattedResults);
+    res.send(formattedResults);    
   } catch (error) {
-    res.sendFile(path.join(__dirname, '../public/500.html'));
+    res.sendFile(path.join(__dirname, '../../public/500.html'));
   }
 });
 

@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta property="og:image" content="https://github.com/BrunoSobrino.png">   
-    <title>API | YouTube Downloader</title>
+    <title>API | Facebook Downloader</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
@@ -140,14 +140,11 @@
             <button class="btn btn-primary theme-button" onclick="toggleTheme()">
                 <i class="fa fa-moon-o"></i><i class="fa fa-sun-o"></i>
             </button>
-        <h1>YouTube Downloader</h1>
-        <p>◉ Inserte el enlace del vídeo de YouTube y elija una opción de descarga:</p>
-        <input type="text" id="youtubeLink" class="form-control" placeholder="Ex: https://www.youtube.com/watch?v=videoID" />
+        <h1>Facebook Downloader</h1>
+        <p>◉ Inserte el enlace de un video de Facebook y seleccione la opción de descarga:</p>
+        <input type="text" id="youtubeLink" class="form-control" placeholder="Ex: https://fb.watch/fOTpgn6UFQ" />
         <div id="downloadButtons">
-            <button class="btn btn-primary download-button" onclick="downloadYouTube('v1/ytmp3')">Descargar Audio 1</button>
-            <button class="btn btn-primary download-button" onclick="downloadYouTube('v2/ytmp3')">Descargar Audio 2</button>
-            <button class="btn btn-primary download-button" onclick="downloadYouTube('v1/ytmp4')">Descargar Video 1</button>
-            <button class="btn btn-primary download-button" onclick="downloadYouTube('v2/ytmp4')">Descargar Video 2</button>
+            <button class="btn btn-primary download-button" onclick="downloadFacebook('fbdl')">Descargar</button>
         </div>
         <p id="downloadLink" style="display: none;"></p>
     </div>
@@ -158,21 +155,21 @@
 </div>
    
     <script>
-        function downloadYouTube(option) {
-            const youtubeLink = document.getElementById("youtubeLink").value.trim();
-            if (youtubeLink === "") {
-                alert("Inserta el enlace de un video de YouTube.");
+        function downloadFacebook(option) {
+            const facebookLink = document.getElementById("youtubeLink").value.trim();
+            if (facebookLink === "") {
+                alert("[❗] Inserta el enlace de un video de Facebook.");
                 return;
             }
-            if (isValidYouTubeLink(youtubeLink)) {
-                const downloadUrl = `/human/${option}?url=${youtubeLink}`;
+            if (isValidFacebookLink(facebookLink)) {
+                const downloadUrl = `/human/${option}?url=${facebookLink}`;
                 window.open(downloadUrl, '_blank');
             } else {
-                alert("El enlace no coincide con un enlace de YouTube válido.");
+                alert("[❗] El enlace no coincide con un enlace de Facebook válido.");
             }
         }
-        function isValidYouTubeLink(link) {
-            const validPatterns = [/youtube\.com\/watch\?v=/i, /youtube\.com\/shorts\//i, /youtu\.be\//i, /youtube\.com\/embed\//i, /youtube\.com\/v\//i, /youtube\.com\/attribution_link\?a=/i];
+        function isValidFacebookLink(link) {
+            const validPatterns = [/facebook\.com\/[^/]+\/videos\//i, /fb\.watch\//i, /fb\.com\/watch\//i, /fb\.me\//i, /fb\.com\/video\.php\?v=/i, /facebook\.com\/share\/v\//i, /facebook\.com\/share\/r\//i, /fb\.com\/share\/v\//i, /fb\.com\/share\/r\//i, /facebook\.com\/[^/]+\/posts\/[^/]+\//i, /facebook\.com\/reel\/[^/]+\//i];
             return validPatterns.some(pattern => pattern.test(link));
         }
         function toggleTheme() {
@@ -186,6 +183,7 @@
             downloadBox.classList.toggle('light-mode');
             downloadBox.classList.toggle('dark-mode');
         }
+        
     </script>
   </body>
 </html>
