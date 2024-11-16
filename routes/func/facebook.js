@@ -17,7 +17,7 @@ const facebookdlfunc = async (url) => {
   }
   try {
     const fbdlResult = await fbdl(url);
-    if (fbdlResult.result.hd || fbdlResult.result.sd) {
+    if (fbdlResult?.result?.hd || fbdlResult?.result?.sd) {
       return {
         status: true,
         resultado: {
@@ -25,8 +25,20 @@ const facebookdlfunc = async (url) => {
           data: fbdlResult.result.hd || fbdlResult.result.sd
         }
       };
-    }
+    } else { throw XD }
   } catch (error) {
+  try {
+    const fbdlResult = await facebookVideo(url);
+    if (fbdlResult?.result[0]?.url || fbdlResult?.result[1]?.url) {
+      return {
+        status: true,
+        resultado: {
+          title: "Facebook video download",
+          data: fbdlResult?.result[0]?.url || fbdlResult?.result[1]?.url
+        }
+      };
+    }
+  } catch (error) {    
   try {
     const data = await facebook.v1(url);
     let res = '';
@@ -145,8 +157,79 @@ const facebookdlfunc = async (url) => {
         }
       }
     }
+   }
   }
  }
+};
+
+async function facebookVideo(url) {
+    try {
+        const baseURLL = "https://fdownloader.net/id";
+        const apiURLL = "https://v3.fdownloader.net/api/ajaxSearch?lang=en";
+        const {
+            data
+        } = await axios(baseURLL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:120.0) Gecko/20100101 Firefox/120.0",
+            },
+            data: new URLSearchParams(
+                Object.entries({
+                    recaptchaToken: "",
+                    q: url,
+                    t: "media",
+                    lang: "en",
+                })
+            ),
+        });
+        const $ = cheerio.load(data);
+        const script = $("body").find("script").text().trim();
+        const k_token = script.split("k_token = ")[1].split(";")[0];
+        const k_exp = script.split("k_exp = ")[1].split(";")[0];
+        const {
+            data: apiData
+        } = await axios(apiURLL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:120.0) Gecko/20100101 Firefox/120.0",
+            },
+            data: new URLSearchParams(
+                Object.entries({
+                    k_exp,
+                    k_token,
+                    q: url,
+                    lang: "en",
+                    web: "fdownloader.net",
+                    v: "v2",
+                    w: "",
+                })
+            ),
+        });
+        const $api = cheerio.load(apiData.data);
+        const result = [];
+        const duration = $api('div.clearfix > p').text().trim();
+        $api('div.tab__content')
+            .find('tbody > tr')
+            .each((index, element) => {
+                const quality = $api(element).find('td.video-quality').text();
+                const videoUrl = $api(element).find('td > a').attr('href');
+                if (quality && videoUrl) {
+                    result.push({
+                        quality,
+                        url: videoUrl,
+                    });
+                }
+            });
+        return {
+            duration,
+            result,
+        };
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
 };
 
 async function igeh(url_media) {
